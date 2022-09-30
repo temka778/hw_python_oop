@@ -18,10 +18,10 @@ class InfoMessage:
         speed = self.speed
         calories = self.calories
         return (f'Тип тренировки: {training_type}; '
-               f'Длительность: {duration:.3f} ч.; '
-               f'Дистанция: {distance:.3f} км; '
-               f'Ср. скорость: {speed:.3f} км/ч; '
-               f'Потрачено ккал: {calories:.3f}.')
+                f'Длительность: {duration:.3f} ч.; '
+                f'Дистанция: {distance:.3f} км; '
+                f'Ср. скорость: {speed:.3f} км/ч; '
+                f'Потрачено ккал: {calories:.3f}.')
 
 
 class Training():
@@ -60,11 +60,12 @@ class Running(Training):
     COEFF_CALORIE_RUN_1 = 18
     COEFF_CALORIE_RUN_2 = 20
     COEFF_TIME_MIN = 60
+
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        return (self.COEFF_CALORIE_RUN_1 * self.get_mean_speed()
-                - self.COEFF_CALORIE_RUN_2) * self.weight\
-                / self.M_IN_KM * self.duration * self.COEFF_TIME_MIN
+        return (self.COEFF_CALORIE_RUN_1 * self.get_mean_speed() 
+            - self.COEFF_CALORIE_RUN_2) * self.weight\
+            / self.M_IN_KM * self.duration * self.COEFF_TIME_MIN
 
 
 class SportsWalking(Training):
@@ -82,9 +83,9 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         return (self.COEFF_CALORIE_WLK_1 * self.weight
-                + (self.get_mean_speed() ** self.COEFF_CALORIE_WLK_2
-                // self.height) * self.COEFF_CALORIE_WLK_3
-                * self.weight) * self.duration * self.COEFF_CALORIE_WLK_4
+            + (self.get_mean_speed() ** self.COEFF_CALORIE_WLK_2
+            // self.height) * self.COEFF_CALORIE_WLK_3
+            * self.weight) * self.duration * self.COEFF_CALORIE_WLK_4
 
 
 class Swimming(Training):
@@ -105,7 +106,7 @@ class Swimming(Training):
 
     def get_spent_calories(self) -> float:
         return float(self.get_mean_speed() + self.COEFF_CALORIE_SWM_1)\
-                     * self.COEFF_CALORIE_SWM_2 * self.weight
+            * self.COEFF_CALORIE_SWM_2 * self.weight
 
 
 def read_package(work_type: str, dt: list) -> Training:
