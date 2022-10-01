@@ -44,7 +44,8 @@ class Training():
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        raise NotImplementedError('Что-то совсем не то, что ожидалось...')
+        raise NotImplementedError(
+            f'Определите get_spent_calories() в {self.__class__.__name__}')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -111,9 +112,9 @@ class Swimming(Training):
 
 def read_package(work_type: str, dt: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    reading_data: Dict[str, classmethod] = {'SWM': Swimming,
-                                            'RUN': Running,
-                                            'WLK': SportsWalking}
+    reading_data: Dict[str, Training] = {'SWM': Swimming,
+                                         'RUN': Running,
+                                         'WLK': SportsWalking}
     return reading_data[work_type](*dt)
 
 
