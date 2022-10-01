@@ -24,6 +24,10 @@ class InfoMessage:
                 f'Потрачено ккал: {calories:.3f}.')
 
 
+def class_name(self):
+    return (self.__class__.__name__)
+
+
 class Training():
     """Базовый класс тренировки."""
     M_IN_KM: int = 1000
@@ -45,11 +49,12 @@ class Training():
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         raise NotImplementedError(
-            f'Определите get_spent_calories() в {self.__class__.__name__}')
+            f'Определите get_spent_calories() '
+            f'в {class_name(self)}')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
-        return InfoMessage(self.__class__.__name__,
+        return InfoMessage(class_name(self),
                            self.duration,
                            self.get_distance(),
                            self.get_mean_speed(),
@@ -118,9 +123,9 @@ def read_package(work_type: str, dt: list) -> Training:
     return reading_data[work_type](*dt)
 
 
-def main(trena: Training) -> None:
+def main(type: Training) -> None:
     """Главная функция.:rtype: object"""
-    info = trena.show_training_info()
+    info = type.show_training_info()
     print(info.get_message())
 
 
