@@ -24,10 +24,6 @@ class InfoMessage:
                 f'Потрачено ккал: {calories:.3f}.')
 
 
-def class_name(self):
-    return (self.__class__.__name__)
-
-
 class Training():
     """Базовый класс тренировки."""
     M_IN_KM: int = 1000
@@ -50,11 +46,14 @@ class Training():
         """Получить количество затраченных калорий."""
         raise NotImplementedError(
             f'Определите get_spent_calories() '
-            f'в {class_name(self)}')
+            f'в {self.__class__.__name__}')
 
     def show_training_info(self) -> InfoMessage:
-        """Вернуть информационное сообщение о выполненной тренировке."""
-        return InfoMessage(class_name(self),
+        """Возвращает объект класса "InfoMessage",
+           который посредством метода "get_message()" 
+           выводит информ. сообщение о тренировке.
+        """
+        return InfoMessage(self.__class__.__name__,
                            self.duration,
                            self.get_distance(),
                            self.get_mean_speed(),
@@ -115,11 +114,12 @@ class Swimming(Training):
             * self.COEFF_CALORIE_SWM_2 * self.weight
 
 
-def read_package(work_type: str, dt: list) -> Training:
+def read_package(work_type: str, dt: list[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
     reading_data: Dict[str, Training] = {'SWM': Swimming,
                                          'RUN': Running,
-                                         'WLK': SportsWalking}
+                                         'WLK': SportsWalking
+                                        }
     return reading_data[work_type](*dt)
 
 
@@ -137,5 +137,8 @@ if __name__ == '__main__':
     ]
 
     for workout_type, data in packages:
-        training = read_package(workout_type, data)
-        main(training)
+        try:
+            training = read_package(workout_type, data)
+            main(training)
+        except KeyError:
+            print('Нет такого типа тренировок...')
