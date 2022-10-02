@@ -50,7 +50,7 @@ class Training():
 
     def show_training_info(self) -> InfoMessage:
         """Возвращает объект класса "InfoMessage",
-           который посредством метода "get_message()" 
+           который посредством метода "get_message()"
            выводит информ. сообщение о тренировке.
         """
         return InfoMessage(self.__class__.__name__,
@@ -118,8 +118,7 @@ def read_package(work_type: str, dt: list[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
     reading_data: Dict[str, Training] = {'SWM': Swimming,
                                          'RUN': Running,
-                                         'WLK': SportsWalking
-                                        }
+                                         'WLK': SportsWalking}
     return reading_data[work_type](*dt)
 
 
