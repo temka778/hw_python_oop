@@ -114,7 +114,7 @@ class Swimming(Training):
             * self.COEFF_CALORIE_SWM_2 * self.weight
 
 
-def read_package(work_type: str, dt: list[int]) -> Training:
+def read_package(work_type: str, dt: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     reading_data: Dict[str, Training] = {'SWM': Swimming,
                                          'RUN': Running,
