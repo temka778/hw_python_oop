@@ -122,9 +122,9 @@ def read_package(work_type: str, dt: list[int]) -> Training:
     return reading_data[work_type](*dt)
 
 
-def main(type: Training) -> None:
+def main(workout: Training) -> None:
     """Главная функция.:rtype: object"""
-    info = type.show_training_info()
+    info = workout.show_training_info()
     print(info.get_message())
 
 
